@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import { MapPlaceholder } from "@/components/MapPlaceholder";
+
+const mapsUrl = "https://maps.app.goo.gl/31nJXLR1YvA6aXvS6";
 
 export const metadata: Metadata = {
   title: "Contatti",
@@ -25,7 +27,16 @@ export default function ContactPage() {
             <div>
               <p className="eyebrow">Studio</p>
               <address className="mt-4 text-sm not-italic leading-7 text-[#73736b]">
-                Via della Forma 18<br />20121 Milano, Italia
+                <a
+                  href={mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-[#20211f]"
+                >
+                  Via della Forma 18
+                  <br />
+                  20121 Milano, Italia
+                </a>
               </address>
             </div>
             <div>
@@ -36,7 +47,15 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <ImagePlaceholder label="Mappa dello studio" alt="Placeholder mappa con posizione dello studio a Milano" tone="sage" className="mt-9 aspect-[16/9]" />
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Apri la posizione dello studio su Google Maps"
+            className="mt-9 block"
+          >
+            <MapPlaceholder className="aspect-[16/9] border border-[#dedbd4]" />
+          </a>
         </div>
 
         <div className="border border-[#dedbd4] p-7 sm:p-10">

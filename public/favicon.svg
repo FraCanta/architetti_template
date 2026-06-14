@@ -1,0 +1,6 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="64" fill="#F5F1EA"/>
+  <rect x="48" y="48" width="416" height="416" rx="48" stroke="#1C1C1B" stroke-width="14"/>
+  <path d="M48 360V464H152" stroke="#B1855B" stroke-width="18" stroke-linecap="square" stroke-linejoin="miter"/>
+  <text x="256" y="305" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="178" fill="#1C1C1B" letter-spacing="-8">SF</text>
+</svg>
