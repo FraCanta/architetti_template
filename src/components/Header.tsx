@@ -29,14 +29,14 @@ export function Header() {
         </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-14 lg:flex"
           aria-label="Navigazione principale"
         >
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`link-line text-[16px] font-medium ${
+              className={`link-line text-[13px] font-medium uppercase ${
                 pathname.startsWith(item.href) ? "text-[#a35f44]" : ""
               }`}
             >
@@ -48,7 +48,7 @@ export function Header() {
         <div className="z-10 hidden lg:block">
           <Link
             href="/contatti"
-            className="inline-flex h-11 items-center bg-[#20211f] px-8 text-[13px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#9a725d]"
+            className="inline-flex h-11 items-center bg-[#20211f] px-8 text-[12px] font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#9a725d]"
           >
             Consulenza
           </Link>

@@ -13,6 +13,7 @@ export default function HomePage() {
   return (
     <>
       <Hero
+        eyebrow="Studio Forma"
         title={
           <>
             <span className="block">Progettiamo</span>

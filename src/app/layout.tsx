@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import "@fontsource-variable/cabin";
+import "@fontsource-variable/raleway";
 import "./globals.css";
 import { Layout } from "@/components/Layout";
 
