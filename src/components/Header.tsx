@@ -8,7 +8,6 @@ const nav = [
   { href: "/studio", label: "Studio" },
   { href: "/progetti", label: "Progetti" },
   { href: "/servizi", label: "Servizi" },
-  { href: "/studio#approccio", label: "Approccio" },
   { href: "/contatti", label: "Contatti" },
 ];
 

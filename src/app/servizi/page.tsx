@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 const serviceImages = [
   "/images/studio-architect-working.png",
   "/images/interior-living-garden.png",
-  "/images/interior-curved-stair.png",
+  "/images/plan-residenza-aurora.png",
   "/images/studio-team-meeting.png",
-  "/images/materials-flatlay.png",
-  "/images/studio-client-meeting.png",
+  "/images/concept-facade-sketch.png",
+  "/images/moodboard-warm-materials.png",
 ];
 
 export default function ServicesPage() {

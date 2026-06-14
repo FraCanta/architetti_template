@@ -65,7 +65,7 @@ export default function HomePage() {
               className="aspect-[5/4]"
             />
             <Photo
-              src="/images/materials-flatlay.png"
+              src="/images/moodboard-natural-materials.png"
               alt="Disegni tecnici e campioni di materiali naturali"
               className="aspect-[5/4]"
             />

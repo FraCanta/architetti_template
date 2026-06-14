@@ -16,6 +16,8 @@ export type Project = {
   imageType: string;
   image: string;
   gallery: string[];
+  materialImages: string[];
+  drawingImages: string[];
   summary: string;
   concept: string;
   challenge: string;
@@ -46,9 +48,17 @@ export const projects: Project[] = [
     image: "/images/villa-pool-evening-a.png",
     gallery: [
       "/images/villa-pool-evening-b.png",
-      "/images/interior-kitchen-dining.png",
       "/images/interior-living-garden.png",
-      "/images/interior-bedroom.png",
+      "/images/plan-residenza-a1.png",
+      "/images/moodboard-warm-materials.png",
+    ],
+    materialImages: [
+      "/images/moodboard-warm-materials.png",
+      "/images/materials-facade-board.png",
+    ],
+    drawingImages: [
+      "/images/plan-residenza-a1.png",
+      "/images/axonometric-exploded-villa.png",
     ],
     summary: "Una casa introversa, aperta alla luce e al paesaggio attraverso tre corti private.",
     concept:
@@ -72,9 +82,17 @@ export const projects: Project[] = [
     image: "/images/interior-living-garden.png",
     gallery: [
       "/images/interior-kitchen-dining.png",
-      "/images/detail-stair-oak.png",
-      "/images/interior-entry.png",
-      "/images/interior-bathroom.png",
+      "/images/interior-concept-overlay.png",
+      "/images/plan-residenza-aurora.png",
+      "/images/moodboard-bathroom-materials.png",
+    ],
+    materialImages: [
+      "/images/moodboard-bathroom-materials.png",
+      "/images/moodboard-natural-materials.png",
+    ],
+    drawingImages: [
+      "/images/plan-residenza-aurora.png",
+      "/images/interior-concept-overlay.png",
     ],
     summary: "Interni continui e materici disegnati per valorizzare la luce naturale.",
     concept:
@@ -100,7 +118,15 @@ export const projects: Project[] = [
       "/images/studio-office.png",
       "/images/studio-conference.png",
       "/images/studio-material-library.png",
-      "/images/studio-drafting-desk.png",
+      "/images/materials-facade-board.png",
+    ],
+    materialImages: [
+      "/images/studio-material-library.png",
+      "/images/materials-facade-board.png",
+    ],
+    drawingImages: [
+      "/images/concept-facade-sketch.png",
+      "/images/plan-residenza-aurora.png",
     ],
     summary: "Un ex laboratorio trasformato in spazio ibrido per lavoro, incontri e cultura.",
     concept:
@@ -126,7 +152,15 @@ export const projects: Project[] = [
       "/images/villa-stone-front.png",
       "/images/interior-kitchen-sea.png",
       "/images/interior-living-warm.png",
-      "/images/interior-curved-stair.png",
+      "/images/axonometric-exploded-villa.png",
+    ],
+    materialImages: [
+      "/images/moodboard-facade-materials.png",
+      "/images/materials-facade-board.png",
+    ],
+    drawingImages: [
+      "/images/axonometric-exploded-villa.png",
+      "/images/concept-facade-sketch.png",
     ],
     summary: "Recupero rispettoso di una villa anni Sessanta affacciata sul lago.",
     concept:
@@ -150,8 +184,16 @@ export const projects: Project[] = [
     gallery: [
       "/images/interior-living-warm.png",
       "/images/detail-olive-bench.png",
-      "/images/detail-stone-wood.png",
+      "/images/moodboard-natural-materials.png",
       "/images/detail-travertine-vase.png",
+    ],
+    materialImages: [
+      "/images/moodboard-natural-materials.png",
+      "/images/moodboard-warm-materials.png",
+    ],
+    drawingImages: [
+      "/images/plan-residenza-a1.png",
+      "/images/interior-concept-overlay.png",
     ],
     summary: "Una casa compatta che rinnova tecniche e atmosfere del costruire mediterraneo.",
     concept:
@@ -174,9 +216,17 @@ export const projects: Project[] = [
     image: "/images/villa-cube-pool.png",
     gallery: [
       "/images/villa-pool-night.png",
-      "/images/detail-facade-window.png",
-      "/images/detail-glass-wood.png",
-      "/images/materials-flatlay.png",
+      "/images/concept-facade-sketch.png",
+      "/images/moodboard-facade-materials.png",
+      "/images/axonometric-exploded-villa.png",
+    ],
+    materialImages: [
+      "/images/moodboard-facade-materials.png",
+      "/images/materials-facade-board.png",
+    ],
+    drawingImages: [
+      "/images/concept-facade-sketch.png",
+      "/images/axonometric-exploded-villa.png",
     ],
     summary: "Concept per un padiglione temporaneo immerso in un giardino storico.",
     concept:
