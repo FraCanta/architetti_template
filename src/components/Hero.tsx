@@ -11,9 +11,9 @@ type HeroProps = {
 export function Hero({ title, text }: HeroProps) {
   return (
     <section className="relative border-b border-[#dedbd4]">
-      <div className="grid lg:h-140 lg:grid-cols-[46%_54%] xl:h-155 2xl:h-screen">
+      <div className="grid lg:h-140 lg:grid-cols-[46%_54%] xl:h-155 2xl:h-[calc(100vh-80px)] ">
         <div className="reveal flex flex-col justify-center px-5 py-16 sm:px-[5vw] lg:py-20">
-          <h1 className="font-display  text-[2.65rem] leading-[1.04] sm:text-[3.1rem] lg:text-[4rem] 2xl:text-[5rem]">
+          <h1 className="font-display text-[2.65rem] leading-[1.04] sm:text-[3.1rem] lg:text-[4rem] 2xl:text-[4.2rem] 3xl:text-[6rem] ">
             {title}
           </h1>
           <p className="mt-7 max-w-md text-[16px] leading-6 text-[#696a65]">
@@ -34,7 +34,7 @@ export function Hero({ title, text }: HeroProps) {
           className="reveal reveal-delay min-h-[420px] lg:h-full"
         />
       </div>
-      <div className="absolute bottom-10 left-[5vw] hidden items-center gap-3 text-[8px] uppercase tracking-[0.16em] text-[#696a65] lg:flex">
+      <div className="absolute bottom-10 left-[5vw] hidden items-center gap-3 text-[12px] uppercase tracking-[0.16em] text-[#696a65] lg:flex">
         <span>Scroll</span>
         <span className="h-px w-10 bg-[#696a65]" />
       </div>

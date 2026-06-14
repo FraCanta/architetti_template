@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { MapPlaceholder } from "@/components/MapPlaceholder";
@@ -33,9 +34,9 @@ export default function ContactPage() {
                   rel="noreferrer"
                   className="transition-colors hover:text-[#20211f]"
                 >
-                  Via della Forma 18
+                  Via Roma
                   <br />
-                  20121 Milano, Italia
+                  Citta metropolitana di Milano
                 </a>
               </address>
             </div>
@@ -102,8 +103,9 @@ export default function ContactPage() {
               <input type="checkbox" name="privacy" required className="mt-1 accent-[#a35f44]" />
               Ho letto l&apos;informativa privacy e acconsento al trattamento dei dati per essere ricontattato.
             </label>
-            <button type="submit" className="min-h-14 bg-[#252622] px-7 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#a35f44] sm:col-span-2">
-              Invia richiesta ↗
+            <button type="submit" className="inline-flex min-h-14 items-center justify-center gap-3 bg-[#252622] px-7 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#a35f44] sm:col-span-2">
+              Invia richiesta
+              <Icon icon="tabler:arrow-up-right" className="h-4 w-4" aria-hidden="true" />
             </button>
           </form>
           <p className="mt-5 text-xs leading-5 text-[#73736b]">

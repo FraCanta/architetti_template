@@ -1,27 +1,13 @@
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Button } from "@/components/Button";
 import { Hero } from "@/components/Hero";
 import { Photo } from "@/components/Photo";
 import { ProjectCard } from "@/components/ProjectCard";
-import { SectionTitle } from "@/components/SectionTitle";
+import { ReviewCarousel } from "@/components/ReviewCarousel";
 import { ServiceCard } from "@/components/ServiceCard";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
-
-const method = [
-  ["01", "Ascolto e analisi", "Conosciamo esigenze, abitudini e contesto."],
-  ["02", "Concept progettuale", "Sviluppiamo idee e soluzioni coerenti."],
-  ["03", "Sviluppo tecnico", "Definiamo ogni scelta con precisione."],
-  ["04", "Materiali e dettagli", "Costruiamo atmosfera, qualità e durata."],
-  ["05", "Direzione lavori", "Seguiamo il cantiere fino alla consegna."],
-];
-
-const values = [
-  ["Funzionalità", "Spazi chiari che migliorano la vita."],
-  ["Estetica", "Bellezza, armonia e proporzioni."],
-  ["Sostenibilità", "Scelte responsabili per il futuro."],
-  ["Cura del dettaglio", "Ogni elemento fa la differenza."],
-];
 
 export default function HomePage() {
   return (
@@ -53,9 +39,14 @@ export default function HomePage() {
             </p>
             <Link
               href="/studio"
-              className="mt-8 inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.13em]"
+              className="mt-8 inline-flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.13em]"
             >
-              Scopri di più <span aria-hidden="true">→</span>
+              Scopri di più
+              <Icon
+                icon="tabler:arrow-right"
+                className="h-4 w-4"
+                aria-hidden="true"
+              />
             </Link>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -94,9 +85,14 @@ export default function HomePage() {
             </p>
             <Link
               href="/progetti"
-              className="hidden text-[9px] font-bold uppercase tracking-[0.13em] sm:block"
+              className="hidden items-center gap-2 text-[12px] font-bold uppercase tracking-[0.13em] sm:inline-flex"
             >
-              Vedi tutti i progetti&nbsp; →
+              Vedi tutti i progetti
+              <Icon
+                icon="tabler:arrow-right"
+                className="h-4 w-4"
+                aria-hidden="true"
+              />
             </Link>
           </div>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
@@ -114,79 +110,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[#dedbd4] section-space">
-        <div className="container-site">
-          <SectionTitle
-            eyebrow="Il nostro approccio"
-            title="Un percorso chiaro, dal primo incontro al cantiere."
-          />
-          <div className="relative mt-14 grid gap-8 md:grid-cols-5">
-            <div className="absolute left-[10%] right-[10%] top-12 hidden h-px bg-[#dedbd4] md:block" />
-            {method.map(([number, title, text]) => (
-              <article
-                key={number}
-                className="relative bg-[#fcfbf8] text-center"
-              >
-                <p className="text-xl font-light text-[#9a725d]">{number}</p>
-                <span className="mx-auto mt-5 block h-3 w-3 rounded-full border border-[#9a725d] bg-[#fcfbf8]" />
-                <h3 className="mt-6 text-[14px] font-medium">{title}</h3>
-                <p className="mx-auto mt-3 max-w-48 text-[12px] leading-[1.55] text-[#696a65]">
-                  {text}
-                </p>
-              </article>
-            ))}
+      <section className="border-t border-[#dedbd4] bg-[#f5f3ee]">
+        <div className="container-site py-16 sm:py-20">
+          <div className="mx-auto ">
+            <ReviewCarousel />
           </div>
         </div>
       </section>
 
-      <section className="border-t border-[#dedbd4] bg-[#f5f3ee]">
-        <div className="grid lg:grid-cols-3">
-          <div className="py-14 lg:px-20">
-            <p className="eyebrow">I nostri valori</p>
-            <div className="mt-8 grid gap-x-8 gap-y-7 sm:grid-cols-2">
-              {values.map(([title, text], index) => (
-                <article
-                  key={title}
-                  className="grid grid-cols-[28px_1fr] gap-3"
-                >
-                  <span className="text-sm text-[#9a725d]">0{index + 1}</span>
-                  <div>
-                    <h3 className="text-xs font-medium">{title}</h3>
-                    <p className="mt-1 text-[10px] leading-4 text-[#696a65]">
-                      {text}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-          <figure className="border-y border-[#dedbd4] py-14 lg:border-x lg:border-y-0 lg:px-10">
-            <p className="eyebrow">Dicono di noi</p>
-            <blockquote className="mt-8 text-sm leading-7 text-[#555650]">
-              “Professionalità, creatività e grande attenzione alle nostre
-              esigenze. Il risultato ha superato le aspettative.”
-            </blockquote>
-            <figcaption className="mt-8 text-xs font-medium">
-              Giulia e Marco
-              <span className="mt-1 block text-[10px] font-normal text-[#696a65]">
-                Ristrutturazione appartamento
-              </span>
-            </figcaption>
-          </figure>
-          <div className="relative min-h-80  overflow-hidden bg-[#2a2b28] px-8 py-14 text-white lg:px-12">
-            <div className="absolute -bottom-16 -right-12 h-64 w-64 rounded-full border border-white/10" />
-            <div className="absolute bottom-12 right-16 h-36 w-24 border border-white/15" />
-            <div className="relative z-10 max-w-sm">
-              <p className="font-display text-[2.1rem] leading-tight">
+      <section className="bg-[#f5f3ee] ">
+        <div
+          className="relative min-h-80 overflow-hidden px-8 flex items-center w-full text-white sm:px-12 lg:px-16"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, rgba(31,32,29,0.9), rgba(31,32,29,0.62)), url('/images/detail-olive-bench.png')",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="absolute inset-0 bg-[#2a2b28]/10" />
+          <div className="relative z-10 w-full  flex flex-wrap justify-between items-center h-full">
+            <div>
+              <p className="font-display text-[2.1rem] leading-tight sm:text-[2.6rem]">
                 Hai un progetto da realizzare?
               </p>
-              <p className="mt-5 text-[14px] leading-6 text-white/60">
+              <p className="mt-5 text-[14px] leading-6 text-white/70">
                 Parliamone insieme. Siamo pronti ad ascoltare le tue idee.
               </p>
-              <Button href="/contatti" variant="light" className="mt-8">
-                Contattaci
-              </Button>
             </div>
+
+            <Button href="/contatti" variant="light" className="mt-8">
+              Contattaci
+            </Button>
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -24,10 +25,10 @@ export function Button({
   return (
     <Link
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-3 px-8 text-[11px] font-bold uppercase tracking-[0.13em] transition-colors duration-300 ${styles[variant]} ${className}`}
+      className={`inline-flex  min-h-12 items-center justify-center gap-3 px-8 text-[11px] font-bold uppercase tracking-[0.13em] transition-colors duration-300 ${styles[variant]} ${className}`}
     >
       {children}
-      <span aria-hidden="true">→</span>
+      <Icon icon="tabler:arrow-right" className="h-4 w-4" aria-hidden="true" />
     </Link>
   );
 }

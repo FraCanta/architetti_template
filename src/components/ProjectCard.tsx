@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { Photo } from "./Photo";
@@ -19,7 +20,11 @@ export function ProjectCard({ project }: { project: Project }) {
               {project.category} · {project.location} · {project.year}
             </p>
           </div>
-          <span className="mt-1 text-xs transition-transform duration-300 group-hover:translate-x-1">→</span>
+          <Icon
+            icon="tabler:arrow-right"
+            className="mt-1 h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden="true"
+          />
         </div>
       </Link>
     </article>

@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -56,7 +57,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <h1 className="font-display text-[2.7rem] sm:text-[3.1rem]">
               {project.title}
             </h1>
-            <dl className="mt-6 grid max-w-xl grid-cols-4 gap-5 text-[15px]">
+            <dl className="mt-6 grid max-w-xl grid-cols-2 gap-x-8 gap-y-5 text-[14px] sm:grid-cols-4 sm:text-[15px]">
               <div>
                 <dt className="text-[#777872]">Categoria</dt>
                 <dd className="mt-2">{project.category}</dd>
@@ -106,17 +107,20 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
         <ProjectTabs project={project} />
 
-        <section className="container-site pb-14">
+        <section className="container-site border-t border-[#dedbd4] pb-16 pt-14 sm:pt-18">
           <div className="flex items-end justify-between">
-            <h2 className="text-sm font-medium">Progetti correlati</h2>
+            <h2 className="font-display text-[2rem] leading-tight sm:text-[2.4rem]">
+              Progetti correlati
+            </h2>
             <Link
               href="/progetti"
-              className="text-[9px] uppercase tracking-[0.1em]"
+              className="inline-flex items-center gap-2 text-[9px] uppercase tracking-[0.1em]"
             >
-              Vedi tutti&nbsp; →
+              Vedi tutti
+              <Icon icon="tabler:arrow-right" className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-          <div className="mt-6 grid gap-5 sm:grid-cols-3">
+          <div className="mt-9 grid gap-5 sm:grid-cols-3">
             {related.map((item) => (
               <ProjectCard key={item.slug} project={item} />
             ))}

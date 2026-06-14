@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Layout } from "@/components/Layout";
 
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
-  themeColor: "#F5F1EA",
   openGraph: {
     title: "Studio Forma | Architettura e Interior Design",
     description:
@@ -28,6 +27,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "it_IT",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#F5F1EA",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

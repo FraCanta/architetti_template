@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -38,8 +39,9 @@ export default function ServicesPage() {
               <div>
                 <h2 className="text-[16px] font-medium">{service.title}</h2>
                 <p className="mt-3 text-[13px] leading-6 text-[#696a65]">{service.description}</p>
-                <Link href="/contatti" className="mt-5 inline-block text-[9px] font-bold uppercase tracking-[0.12em]">
-                  Scopri di più&nbsp; →
+                <Link href="/contatti" className="mt-5 inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.12em]">
+                  Scopri di più
+                  <Icon icon="tabler:arrow-right" className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </article>

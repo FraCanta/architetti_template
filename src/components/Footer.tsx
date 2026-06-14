@@ -34,9 +34,9 @@ export function Footer() {
               rel="noreferrer"
               className="transition-colors hover:text-white"
             >
-              Via della Forma 18
+              Via Roma
               <br />
-              20121 Milano, Italia
+              Citta metropolitana di Milano
             </a>
             <br />
             +39 02 0000 0000
