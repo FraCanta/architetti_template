@@ -9,6 +9,16 @@ const mapsUrl = "https://maps.app.goo.gl/31nJXLR1YvA6aXvS6";
 export const metadata: Metadata = {
   title: "Contatti",
   description: "Contatta Atelier Nova per una consulenza su progetti di architettura, interni o ristrutturazione.",
+  alternates: {
+    canonical: "/contatti",
+  },
+  openGraph: {
+    title: "Contatti | Studio Forma",
+    description:
+      "Raccontaci il tuo progetto: ti aiuteremo a capire il percorso più adatto.",
+    url: "/contatti",
+    images: ["/images/studio-client-meeting.png"],
+  },
 };
 
 const inputClass =

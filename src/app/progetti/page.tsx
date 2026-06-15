@@ -7,6 +7,16 @@ export const metadata: Metadata = {
   title: "Progetti",
   description:
     "Portfolio di architettura, interior design, ristrutturazioni e visualizzazioni 3D di Atelier Nova.",
+  alternates: {
+    canonical: "/progetti",
+  },
+  openGraph: {
+    title: "Progetti | Studio Forma",
+    description:
+      "Portfolio di architettura, interni e ristrutturazioni progettati da Studio Forma.",
+    url: "/progetti",
+    images: ["/images/villa-pool-evening-a.png"],
+  },
 };
 
 export default function ProjectsPage() {

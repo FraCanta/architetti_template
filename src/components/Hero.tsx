@@ -27,13 +27,15 @@ export function Hero({ eyebrow, title, text }: HeroProps) {
             </Button>
           </div>
         </div>
-        <Photo
-          src="/images/villa-hero.png"
-          alt="Placeholder per una grande fotografia di architettura contemporanea"
-          priority
-          sizes="(max-width: 1024px) 100vw, 54vw"
-          className="min-h-[420px] lg:h-full"
-        />
+        <div className="relative min-h-[420px] lg:h-full">
+          <Photo
+            src="/images/villa-hero.png"
+            alt="Placeholder per una grande fotografia di architettura contemporanea"
+            priority
+            sizes="(max-width: 1024px) 100vw, 54vw"
+            className="h-full min-h-[420px]"
+          />
+        </div>
       </div>
       <div className="absolute bottom-10 left-[5vw] hidden items-center gap-3 text-[12px] uppercase tracking-[0.16em] text-[#696a65] lg:flex">
         <span>Scroll</span>

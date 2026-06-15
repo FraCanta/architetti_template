@@ -1,6 +1,5 @@
 import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { Button } from "@/components/Button";
 import { Photo } from "@/components/Photo";
@@ -11,6 +10,16 @@ export const metadata: Metadata = {
   title: "Servizi",
   description:
     "Progettazione architettonica, interior design, ristrutturazioni, direzione lavori, render 3D e consulenza.",
+  alternates: {
+    canonical: "/servizi",
+  },
+  openGraph: {
+    title: "Servizi | Studio Forma",
+    description:
+      "Scopri i servizi di Studio Forma: progettazione, interior design, ristrutturazioni, direzione lavori, render 3D e consulenza.",
+    url: "/servizi",
+    images: ["/images/studio-architect-working.png"],
+  },
 };
 
 const services = [
@@ -105,21 +114,29 @@ const method = [
     number: "01",
     title: "Ascolto e analisi",
     text: "Partiamo dalle esigenze, dal contesto e dai vincoli per definire obiettivi e priorità reali.",
+    timing: "1 incontro",
+    deliverable: "Brief iniziale e priorità di intervento",
   },
   {
     number: "02",
     title: "Concept progettuale",
     text: "Traduciamo le prime indicazioni in una visione spaziale, funzionale e materica condivisa.",
+    timing: "2-4 settimane",
+    deliverable: "Layout, moodboard e direzione progettuale",
   },
   {
     number: "03",
     title: "Sviluppo tecnico",
     text: "Approfondiamo il progetto con elaborati, dettagli e scelte necessarie alla sua realizzazione.",
+    timing: "In base alla scala",
+    deliverable: "Elaborati tecnici, materiali e capitolato",
   },
   {
     number: "04",
     title: "Realizzazione e coordinamento",
     text: "Seguiamo persone, lavorazioni e decisioni affinché il risultato resti fedele al progetto.",
+    timing: "Fase cantiere",
+    deliverable: "Coordinamento, verifiche e controllo qualità",
   },
 ];
 
@@ -199,18 +216,6 @@ export default function ServicesPage() {
                     </ul>
                   </div>
 
-                  <Link
-                    href={`#${service.slug}`}
-                    className="mt-8 inline-flex items-center gap-3 self-start text-[11px] font-bold uppercase tracking-[0.13em]"
-                    aria-label={`Scopri il servizio ${service.title}`}
-                  >
-                    Scopri il servizio
-                    <Icon
-                      icon="tabler:arrow-right"
-                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                      aria-hidden="true"
-                    />
-                  </Link>
                 </div>
               </article>
             ))}
@@ -228,21 +233,39 @@ export default function ServicesPage() {
           <SectionTitle
             eyebrow="Metodo di lavoro"
             title="Dall'ascolto alla realizzazione"
-            text="Un processo ordinato permette di affrontare ogni decisione al momento giusto, mantenendo insieme visione e fattibilità."
+            text="Un processo ordinato permette di sapere sempre cosa succede, cosa serve decidere e quale risultato aspettarsi dalla fase successiva."
           />
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-px border border-[#dedbd4] bg-[#dedbd4] md:grid-cols-2 lg:grid-cols-4">
             {method.map((step) => (
               <article
                 key={step.number}
-                className="border-t border-[#20211f] pt-5"
+                className="bg-[#fcfbf8] p-7 sm:p-8"
               >
                 <span className="text-xs text-[#9a725d]">{step.number}</span>
-                <h3 className="mt-8 text-lg font-medium">{step.title}</h3>
+                <h3 className="mt-7 text-lg font-medium">{step.title}</h3>
                 <p className="mt-4 text-[13px] leading-6 text-[#696a65]">
                   {step.text}
                 </p>
+                <div className="mt-7 border-t border-[#dedbd4] pt-5">
+                  <p className="eyebrow !text-[10px]">Cosa ricevi</p>
+                  <p className="mt-3 text-[13px] leading-5 text-[#565752]">
+                    {step.deliverable}
+                  </p>
+                  <p className="mt-5 text-[11px] uppercase tracking-[0.12em] text-[#9a725d]">
+                    {step.timing}
+                  </p>
+                </div>
               </article>
             ))}
+          </div>
+          <div className="mt-10 grid gap-6 border-t border-[#dedbd4] pt-8 lg:grid-cols-[0.7fr_1.3fr]">
+            <p className="eyebrow">Dopo la consulenza</p>
+            <p className="max-w-3xl text-[15px] leading-7 text-[#696a65]">
+              Se il progetto prosegue, trasformiamo il primo orientamento in un
+              percorso operativo: fasi, documenti, scelte da affrontare e
+              priorità economiche vengono messi in ordine prima di avviare il
+              lavoro tecnico.
+            </p>
           </div>
         </div>
       </section>

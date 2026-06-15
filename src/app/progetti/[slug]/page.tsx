@@ -21,7 +21,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return { title: project.title, description: project.summary };
+  return {
+    title: project.title,
+    description: project.summary,
+    alternates: {
+      canonical: `/progetti/${project.slug}`,
+    },
+    openGraph: {
+      title: `${project.title} | Studio Forma`,
+      description: project.summary,
+      url: `/progetti/${project.slug}`,
+      images: [project.image],
+      type: "article",
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {

@@ -8,6 +8,18 @@ export const metadata: Metadata = {
   title: "Ispirazioni",
   description:
     "Una moodboard editoriale di interni, materiali, palette e atmosfere progettuali selezionate da Studio Forma.",
+  alternates: {
+    canonical: "/ispirazioni",
+  },
+  openGraph: {
+    title: "Ispirazioni | Studio Forma",
+    description:
+      "Moodboard editoriale con materiali, palette e atmosfere progettuali per immaginare nuovi modi di abitare.",
+    url: "/ispirazioni",
+    images: [
+      "/images/ispirazioni/interno_minimalista_mediterraneo_con_terrazza.png",
+    ],
+  },
 };
 
 export default function InspirationsPage() {

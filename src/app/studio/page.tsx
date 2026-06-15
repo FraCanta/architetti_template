@@ -7,6 +7,16 @@ export const metadata: Metadata = {
   title: "Studio",
   description:
     "Conosci Studio Forma: approccio, missione, visione, team e valori.",
+  alternates: {
+    canonical: "/studio",
+  },
+  openGraph: {
+    title: "Studio | Studio Forma",
+    description:
+      "Approccio, team e valori dello studio di architettura e interior design Studio Forma.",
+    url: "/studio",
+    images: ["/images/studio-office.png"],
+  },
 };
 
 const team = [

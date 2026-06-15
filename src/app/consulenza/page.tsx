@@ -8,6 +8,16 @@ export const metadata: Metadata = {
   title: "Consulenza architettonica",
   description:
     "Un confronto mirato per chiarire esigenze, vincoli, budget e possibilità prima di acquistare, ristrutturare o ripensare uno spazio.",
+  alternates: {
+    canonical: "/consulenza",
+  },
+  openGraph: {
+    title: "Consulenza architettonica | Studio Forma",
+    description:
+      "Un primo confronto per orientare acquisti, ristrutturazioni e trasformazioni dello spazio.",
+    url: "/consulenza",
+    images: ["/images/studio-client-meeting.png"],
+  },
 };
 
 const audiences = [
