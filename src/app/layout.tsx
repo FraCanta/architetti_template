@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/cabin";
 import "@fontsource-variable/raleway";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import { Layout } from "@/components/Layout";
 

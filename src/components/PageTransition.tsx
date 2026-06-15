@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type TransitionPhase = "idle" | "covering" | "covered" | "revealing";
 
@@ -20,6 +20,10 @@ export function PageTransition({ children }: { children: ReactNode }) {
     phaseRef.current = nextPhase;
     setPhase(nextPhase);
   };
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     if (phaseRef.current !== "covered") return;

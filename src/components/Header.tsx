@@ -47,7 +47,7 @@ export function Header() {
 
         <div className="z-10 hidden lg:block">
           <Link
-            href="/contatti"
+            href="/consulenza"
             className="inline-flex h-11 items-center bg-[#20211f] px-8 text-[12px] font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#9a725d]"
           >
             Consulenza
@@ -87,7 +87,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="/contatti"
+            href="/consulenza"
             onClick={() => setOpen(false)}
             className="mt-6 flex h-12 items-center justify-center bg-[#252622] text-[12px] font-bold uppercase tracking-[0.12em] text-white"
           >

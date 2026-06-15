@@ -15,7 +15,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scrollbar-width: none;
 }
 
@@ -103,6 +102,10 @@ h3 {
   animation-delay: 150ms;
 }
 
+.finder-step {
+  animation: finder-step-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 .image-placeholder {
   overflow: hidden;
   position: relative;
@@ -175,6 +178,17 @@ h3 {
   from {
     opacity: 0;
     transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes finder-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
   to {
     opacity: 1;

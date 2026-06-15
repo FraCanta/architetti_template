@@ -13,7 +13,28 @@ export const metadata: Metadata = {
 const inputClass =
   "mt-2 w-full border-b border-[#bdb8ad] bg-transparent px-0 py-3 text-sm outline-none transition-colors focus:border-[#a35f44]";
 
-export default function ContactPage() {
+type ContactPageProps = {
+  searchParams: Promise<{ servizio?: string | string[] }>;
+};
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const params = await searchParams;
+  const service = Array.isArray(params.servizio)
+    ? params.servizio[0]
+    : params.servizio;
+  const projectTypes: Record<string, string> = {
+    consulenza: "Consulenza architettonica",
+    "consulenza-architettonica": "Consulenza architettonica",
+    "progettazione-architettonica": "Progettazione architettonica",
+    "interior-design": "Interior design",
+    ristrutturazioni: "Ristrutturazione",
+    "direzione-lavori": "Direzione lavori",
+    "render-3d": "Render e visualizzazione 3D",
+  };
+  const selectedProjectType = service
+    ? (projectTypes[service.toLocaleLowerCase("it")] ?? "")
+    : "";
+
   return (
     <section className="container-site pb-20 pt-12 sm:pt-16">
       <Breadcrumb items={[{ label: "Contatti" }]} />
@@ -75,13 +96,15 @@ export default function ContactPage() {
             </label>
             <label className="text-xs font-bold uppercase tracking-[0.1em]">
               Tipo di progetto *
-              <select className={inputClass} name="projectType" required defaultValue="">
+              <select className={inputClass} name="projectType" required defaultValue={selectedProjectType}>
                 <option value="" disabled>Seleziona</option>
-                <option>Nuova costruzione</option>
-                <option>Ristrutturazione</option>
-                <option>Interior design</option>
-                <option>Spazio commerciale</option>
-                <option>Consulenza</option>
+                <option value="Progettazione architettonica">Progettazione architettonica</option>
+                <option value="Ristrutturazione">Ristrutturazione</option>
+                <option value="Interior design">Interior design</option>
+                <option value="Spazio commerciale">Spazio commerciale</option>
+                <option value="Direzione lavori">Direzione lavori</option>
+                <option value="Render e visualizzazione 3D">Render e visualizzazione 3D</option>
+                <option value="Consulenza architettonica">Consulenza architettonica</option>
               </select>
             </label>
             <label className="text-xs font-bold uppercase tracking-[0.1em] sm:col-span-2">
