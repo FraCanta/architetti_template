@@ -3,7 +3,7 @@ import { projects } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://ateliernova.example";
-  const routes = ["", "/progetti", "/servizi", "/consulenza", "/studio", "/contatti"];
+  const routes = ["", "/progetti", "/servizi", "/ispirazioni", "/consulenza", "/studio", "/contatti"];
 
   return [
     ...routes.map((route) => ({

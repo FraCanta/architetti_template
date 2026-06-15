@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { MapPlaceholder } from "@/components/MapPlaceholder";
+import { inspirations } from "@/data/inspirations";
 
 const mapsUrl = "https://maps.app.goo.gl/31nJXLR1YvA6aXvS6";
 
@@ -14,7 +15,10 @@ const inputClass =
   "mt-2 w-full border-b border-[#bdb8ad] bg-transparent px-0 py-3 text-sm outline-none transition-colors focus:border-[#a35f44]";
 
 type ContactPageProps = {
-  searchParams: Promise<{ servizio?: string | string[] }>;
+  searchParams: Promise<{
+    servizio?: string | string[];
+    ispirazione?: string | string[];
+  }>;
 };
 
 export default async function ContactPage({ searchParams }: ContactPageProps) {
@@ -34,6 +38,12 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
   const selectedProjectType = service
     ? (projectTypes[service.toLocaleLowerCase("it")] ?? "")
     : "";
+  const inspirationSlug = Array.isArray(params.ispirazione)
+    ? params.ispirazione[0]
+    : params.ispirazione;
+  const selectedInspiration = inspirations.find(
+    (inspiration) => inspiration.slug === inspirationSlug,
+  );
 
   return (
     <section className="container-site pb-20 pt-12 sm:pt-16">
@@ -81,7 +91,20 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         </div>
 
         <div className="border border-[#dedbd4] p-7 sm:p-10">
+          {selectedInspiration && (
+            <div className="mb-8 border-l-2 border-[#9a725d] bg-[#f5f3ee] px-5 py-4">
+              <p className="eyebrow !text-[10px]">Ispirazione selezionata</p>
+              <p className="mt-2 text-sm">{selectedInspiration.title}</p>
+            </div>
+          )}
           <form className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+            {selectedInspiration && (
+              <input
+                type="hidden"
+                name="inspiration"
+                value={selectedInspiration.slug}
+              />
+            )}
             <label className="text-xs font-bold uppercase tracking-[0.1em]">
               Nome e cognome *
               <input className={inputClass} type="text" name="name" required autoComplete="name" placeholder="Come possiamo chiamarti?" />

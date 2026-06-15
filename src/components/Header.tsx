@@ -8,6 +8,7 @@ const nav = [
   { href: "/studio", label: "Studio" },
   { href: "/progetti", label: "Progetti" },
   { href: "/servizi", label: "Servizi" },
+  { href: "/ispirazioni", label: "Ispirazioni" },
   { href: "/contatti", label: "Contatti" },
 ];
 
@@ -29,7 +30,7 @@ export function Header() {
         </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-14 lg:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 xl:gap-12 lg:flex"
           aria-label="Navigazione principale"
         >
           {nav.map((item) => (
@@ -69,7 +70,7 @@ export function Header() {
       <div
         id="mobile-menu"
         className={`overflow-hidden border-t border-black/10 bg-[#fcfbf8] transition-[max-height,opacity] duration-500 lg:hidden ${
-          open ? "max-h-[460px] opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[540px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <nav
