@@ -51,7 +51,7 @@ export function Header() {
             href="/consulenza"
             className="inline-flex h-11 items-center bg-[#20211f] px-8 text-[12px] font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#9a725d]"
           >
-            Consulenza
+            Richiedi una Consulenza
           </Link>
         </div>
 
