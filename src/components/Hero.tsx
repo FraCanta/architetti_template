@@ -24,7 +24,7 @@ export function Hero({ eyebrow, title, text }: HeroProps) {
       media.add("(prefers-reduced-motion: no-preference)", () => {
         const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
         intro.fromTo("[data-hero-eyebrow]", { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.55 });
-        intro.fromTo("[data-hero-line]", { yPercent: 110 }, { yPercent: 0, duration: 0.8, stagger: 0.12 }, "<0.08");
+        intro.fromTo("[data-hero-line]", { yPercent: 125 }, { yPercent: 0, duration: 0.8, stagger: 0.12 }, "<0.08");
         intro.fromTo("[data-hero-photo]", { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: 1.15, ease: "power2.inOut" }, "<0.12");
         intro.fromTo(".hero-image", { xPercent: 5, scale: 1.08 }, { xPercent: 0, scale: 1, duration: 1.2, ease: "power2.out" }, "<");
         intro.fromTo("[data-hero-detail]", { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.55, stagger: 0.1 }, "<0.48");

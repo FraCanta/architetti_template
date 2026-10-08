@@ -4,8 +4,7 @@ import { Icon } from "@iconify/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { createPortal } from "react-dom";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import type { Project } from "@/data/projects";
 import { Photo } from "./Photo";
 
@@ -15,17 +14,6 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const [cursorReady, setCursorReady] = useState(false);
-  const [cursorLabel, setCursorLabel] = useState("Scorri");
-
-  useLayoutEffect(() => {
-    const media = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
-    const update = () => setCursorReady(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -33,8 +21,8 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
     const track = trackRef.current;
     if (!section || !viewport || !track) return;
 
+    const media = gsap.matchMedia();
     const context = gsap.context(() => {
-      const media = gsap.matchMedia();
       media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
         gsap.set(viewport, { overflow: "hidden" });
         const cards = gsap.utils.toArray<HTMLElement>("[data-project-card]", track);
@@ -90,84 +78,62 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
         resizeObserver.observe(viewport);
         return () => resizeObserver.disconnect();
       });
+
+      media.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
+        const cards = gsap.utils.toArray<HTMLElement>("[data-project-card]", track);
+        cards.forEach((card, index) => {
+          const photo = card.querySelector<HTMLElement>(".featured-project-photo");
+          const image = card.querySelector<HTMLElement>(".featured-project-image");
+          const metadata = card.querySelector<HTMLElement>("[data-project-meta]");
+          if (!photo || !image || !metadata) return;
+
+          const verticalReveal = index % 2 === 0;
+          const initialClip = verticalReveal ? "inset(0 0 100% 0)" : "inset(0 100% 0 0)";
+          const initialImageOffset = verticalReveal ? { yPercent: 4 } : { xPercent: 4 };
+          const finalImageOffset = verticalReveal ? { yPercent: 0 } : { xPercent: 0 };
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: "top 82%",
+              end: "top 28%",
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          timeline.fromTo(photo,
+            { clipPath: initialClip },
+            { clipPath: "inset(0 0 0 0)", duration: 0.68, ease: "none", immediateRender: false },
+          );
+          timeline.fromTo(image,
+            { ...initialImageOffset, scale: 1.07 },
+            { ...finalImageOffset, scale: 1, duration: 1, ease: "none", immediateRender: false },
+            0,
+          );
+          timeline.fromTo(metadata,
+            { y: 18, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.34, ease: "power1.out", immediateRender: false },
+            0.68,
+          );
+        });
+      });
     }, section);
 
-    return () => context.revert();
-  }, [projects.length]);
-
-  useLayoutEffect(() => {
-    const viewport = viewportRef.current;
-    const cursor = cursorRef.current;
-    if (!viewport || !cursor || !cursorReady) return;
-
-    const context = gsap.context(() => {
-      gsap.set(cursor, { xPercent: -50, yPercent: -50, scale: 0.82, autoAlpha: 0 });
-    }, viewport);
-    const moveX = gsap.quickTo(cursor, "x", { duration: 0.28, ease: "power3.out" });
-    const moveY = gsap.quickTo(cursor, "y", { duration: 0.28, ease: "power3.out" });
-    const showCursor = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse") return;
-      moveX(event.clientX);
-      moveY(event.clientY);
-      viewport.classList.add("has-context-cursor");
-      const hoveredElement = document.elementFromPoint(event.clientX, event.clientY);
-      setCursorLabel(hoveredElement?.closest("[data-project-link]") ? "Apri progetto" : "Scorri");
-      gsap.killTweensOf(cursor);
-      gsap.to(cursor, { autoAlpha: 1, scale: 1, duration: 0.24, ease: "power2.out" });
-    };
-    const moveCursor = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse") return;
-      moveX(event.clientX);
-      moveY(event.clientY);
-    };
-    const hideCursor = () => {
-      viewport.classList.remove("has-context-cursor");
-      gsap.killTweensOf(cursor);
-      gsap.to(cursor, { autoAlpha: 0, scale: 0.82, duration: 0.2, ease: "power2.out" });
-    };
-    const updateLabel = (event: PointerEvent) => {
-      const from = (event.target as Element | null)?.closest("[data-project-link]");
-      const to = (event.relatedTarget as Element | null)?.closest("[data-project-link]");
-      if (event.type === "pointerover" && from) setCursorLabel("Apri progetto");
-      if (event.type === "pointerout" && from && from !== to) setCursorLabel(to ? "Apri progetto" : "Scorri");
-    };
-
-    viewport.addEventListener("pointerenter", showCursor);
-    viewport.addEventListener("pointermove", moveCursor);
-    viewport.addEventListener("pointerleave", hideCursor);
-    viewport.addEventListener("pointerover", updateLabel);
-    viewport.addEventListener("pointerout", updateLabel);
-
     return () => {
-      viewport.removeEventListener("pointerenter", showCursor);
-      viewport.removeEventListener("pointermove", moveCursor);
-      viewport.removeEventListener("pointerleave", hideCursor);
-      viewport.removeEventListener("pointerover", updateLabel);
-      viewport.removeEventListener("pointerout", updateLabel);
-      viewport.classList.remove("has-context-cursor");
-      gsap.killTweensOf(cursor);
-      moveX.tween.kill();
-      moveY.tween.kill();
+      media.revert();
       context.revert();
     };
-  }, [cursorReady]);
+  }, [projects.length]);
 
   return (
     <>
-    {cursorReady && typeof document !== "undefined" && createPortal(
-      <div ref={cursorRef} className="featured-gallery-cursor" aria-hidden="true">
-        <span>{cursorLabel}</span>
-        <Icon icon={cursorLabel === "Scorri" ? "tabler:arrow-right" : "tabler:arrow-up-right"} className="h-4 w-4" />
-      </div>,
-      document.body,
-    )}
     <section ref={sectionRef} className="featured-gallery section-space bg-[#fcfbf8]" aria-labelledby="featured-projects-title">
-      <div className="container-site mb-8 flex items-end justify-between gap-5">
+      <div className="container-site mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
         <div>
           <p className="eyebrow mb-3">04 — Progetti in evidenza</p>
           <h2 id="featured-projects-title" className="gallery-title font-display text-3xl sm:text-4xl">Spazi da vivere, progetti da scoprire.</h2>
         </div>
-        <Link href="/progetti" className="link-line hidden shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] sm:inline-flex">
+        <Link href="/progetti" className="link-line mt-1 inline-flex shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] sm:mt-0">
           Tutti i progetti <Icon icon="tabler:arrow-right" className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
@@ -184,7 +150,7 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
                   sizes="(max-width: 1023px) 84vw, 62vw"
                   imageClassName="featured-project-image"
                 />
-                <div className="flex items-start justify-between gap-5 py-4 sm:py-5">
+                <div data-project-meta className="flex items-start justify-between gap-5 py-4 sm:py-5">
                   <div>
                     <p className="text-xs text-[#696a65]">{project.category} · {project.location} · {project.year}</p>
                     <h3 className="featured-project-title mt-2 font-display text-2xl sm:text-3xl">{project.title}</h3>
@@ -199,9 +165,6 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
           ))}
         </div>
       </div>
-      <Link href="/progetti" className="link-line container-site mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] sm:hidden">
-        Tutti i progetti <Icon icon="tabler:arrow-right" className="h-4 w-4" aria-hidden="true" />
-      </Link>
     </section>
     </>
   );

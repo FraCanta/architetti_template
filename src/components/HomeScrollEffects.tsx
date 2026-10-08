@@ -13,38 +13,56 @@ export function HomeScrollEffects({ children }: { children: ReactNode }) {
   useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const media = gsap.matchMedia();
-    const context = gsap.context(() => {
+    let media = gsap.matchMedia();
+    let context: gsap.Context | undefined;
+    let resizeTimer: number | undefined;
+    const setup = () => {
+      context?.revert();
+      media.revert();
+      media = gsap.matchMedia();
+      context = gsap.context(() => {
       media.add("(prefers-reduced-motion: no-preference)", () => {
         const studio = root.querySelector<HTMLElement>("[data-studio-section]");
         if (studio) {
-          const desktopStudio = window.matchMedia("(min-width: 1024px)").matches;
-          const words = gsap.utils.toArray<HTMLElement>("[data-studio-word]", studio);
-          const photos = gsap.utils.toArray<HTMLElement>("[data-studio-photo]", studio);
+          const words = gsap.utils.toArray<HTMLElement>("[data-studio-fill]", studio);
+          const windowElement = studio.querySelector<HTMLElement>("[data-studio-window]");
+          const track = studio.querySelector<HTMLElement>("[data-studio-track]");
+          const desktop = window.matchMedia("(min-width: 1280px) and (min-height: 800px)").matches;
+          const photoDistance = () => Math.max(0, (track?.scrollHeight ?? 0) - (windowElement?.clientHeight ?? 0));
+          const wordScrollDistance = window.innerHeight * 0.78;
+          const scrollPerWord = wordScrollDistance / Math.max(words.length, 1);
+          const measuredPhotoDistance = desktop ? photoDistance() : 0;
+          const photoDuration = measuredPhotoDistance / scrollPerWord;
+          const holdScrollDistance = desktop ? window.innerHeight * 0.16 : 0;
+          const holdDuration = holdScrollDistance / scrollPerWord;
+          if (desktop && track) gsap.set(track, { y: 0 });
           const timeline = gsap.timeline({
             scrollTrigger: {
               trigger: studio,
-              start: desktopStudio ? "top top+=90" : "top 78%",
-              end: desktopStudio ? () => `+=${window.innerHeight * 1.25}` : "bottom top+=40",
-              pin: desktopStudio ? studio : false,
-              anticipatePin: desktopStudio ? 1 : 0,
+              start: desktop ? "top top+=90" : "top 68%",
+              end: desktop
+                ? () => `+=${Math.ceil(wordScrollDistance + photoDistance() + holdScrollDistance)}`
+                : "bottom 42%",
+              pin: desktop,
+              pinSpacing: desktop,
+              anticipatePin: desktop ? 1 : 0,
+              refreshPriority: desktop ? 1 : 0,
               scrub: true,
               invalidateOnRefresh: true,
             },
           });
           words.forEach((word, index) => {
-            timeline.fromTo(word, { yPercent: 65, autoAlpha: 0 }, {
-              yPercent: 0,
-              autoAlpha: 1,
-              color: "#9a725d",
-              duration: 0.55,
-              ease: "power2.out",
-              immediateRender: false,
-            }, index * 0.65);
+            timeline.fromTo(word,
+              { clipPath: "inset(0 100% 0 0)" },
+              { clipPath: "inset(0 0% 0 0)", duration: 1, ease: "none", immediateRender: false },
+              index,
+            );
           });
-          timeline.to(words, { color: "#20211f", duration: 0.2 }, 2.05);
-          timeline.fromTo(photos[0], { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.95, ease: "none", immediateRender: false }, 2.35);
-          timeline.fromTo(photos[1], { clipPath: "inset(0 0 0 100%)", xPercent: 7 }, { clipPath: "inset(0 0 0 0%)", xPercent: 0, duration: 1.05, ease: "none", immediateRender: false }, 3.15);
+          if (desktop && track && measuredPhotoDistance > 0) {
+            timeline.to(track, { y: () => -photoDistance(), duration: photoDuration, ease: "none" }, words.length);
+            const hold = { progress: 0 };
+            timeline.to(hold, { progress: 1, duration: holdDuration, ease: "none" }, words.length + photoDuration);
+          }
         }
 
         const testimonials = root.querySelector<HTMLElement>("[data-testimonials-section]");
@@ -72,13 +90,27 @@ export function HomeScrollEffects({ children }: { children: ReactNode }) {
           });
         }
       });
-    }, root);
+      }, root);
+      ScrollTrigger.refresh();
+    };
 
-    ScrollTrigger.refresh();
+    let refreshAfterFonts = true;
+    setup();
+    const handleResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(setup, 180);
+    };
+    window.addEventListener("resize", handleResize);
+    document.fonts?.ready.then(() => {
+      if (refreshAfterFonts) setup();
+    });
 
     return () => {
+      refreshAfterFonts = false;
+      window.removeEventListener("resize", handleResize);
+      window.clearTimeout(resizeTimer);
       media.revert();
-      context.revert();
+      context?.revert();
     };
   }, []);
 

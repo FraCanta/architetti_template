@@ -17,22 +17,27 @@ export default function HomePage() {
         eyebrow="Studio Forma"
         title={
           <>
-            <span className="block overflow-hidden"><span data-hero-line className="block">Progettiamo</span></span>
-            <span className="block overflow-hidden"><span data-hero-line className="block">spazi che parlano</span></span>
-            <span className="block overflow-hidden"><span data-hero-line className="block">di te.</span></span>
+            <span className="mb-[-0.14em] block overflow-hidden pb-[0.14em]"><span data-hero-line className="block">Progettiamo</span></span>
+            <span className="mb-[-0.14em] block overflow-hidden pb-[0.14em]"><span data-hero-line className="block">spazi che parlano</span></span>
+            <span className="mb-[-0.14em] block overflow-hidden pb-[0.14em]"><span data-hero-line className="block">di te.</span></span>
           </>
         }
         text="Architettura contemporanea, funzionale e senza tempo. Dall'idea alla realizzazione, con cura e visione."
       />
 
-      <section data-studio-section className="section-space">
-        <div className="container-site grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
-          <div className="max-w-md">
+      <section data-studio-section className="studio-section section-space">
+        <div className="container-site grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="max-w-xl">
             <p className="eyebrow mb-6 flex items-center gap-3 after:h-px after:w-10 after:bg-[#b89a87]">
               Lo studio
             </p>
-            <h2 className="studio-title font-display text-[2.15rem] leading-[1.12] sm:text-[2.45rem]">
-              <span data-studio-word className="inline-block">Ascoltiamo.</span>{" "}<span data-studio-word className="inline-block">Progettiamo.</span>{" "}<span data-studio-word className="inline-block">Realizziamo.</span>
+            <h2 className="studio-title font-display text-[clamp(2.4rem,5.2vw,6rem)] leading-[0.98]">
+              {["Ascoltiamo.", "Progettiamo.", "Realizziamo."].map((word) => (
+                <span key={word} data-studio-word className="studio-word block">
+                  <span className="studio-word-base">{word}</span>
+                  <span data-studio-fill className="studio-word-fill" aria-hidden="true">{word}</span>
+                </span>
+              ))}
             </h2>
             <p data-studio-copy className="mt-6 text-[15px] leading-7 text-[#696a65]">
               Ogni progetto nasce dall&apos;ascolto delle esigenze del cliente e
@@ -51,20 +56,24 @@ export default function HomePage() {
               />
             </Link>
           </div>
-          <div className="studio-photo-composition grid gap-5 sm:grid-cols-2 lg:items-start">
-            <div data-studio-photo="0" className="studio-photo-frame">
-            <Photo
-              src="/images/studio-drafting-desk.png"
-              alt="Tavolo di lavoro dello studio con disegni e campioni materici"
-              className="aspect-[5/4] lg:aspect-[4/3]"
-            />
-            </div>
-            <div data-studio-photo="1" className="studio-photo-frame sm:mt-12">
-            <Photo
-              src="/images/moodboard-natural-materials.png"
-              alt="Disegni tecnici e campioni di materiali naturali"
-              className="aspect-[5/4] lg:aspect-square"
-            />
+          <div data-studio-window className="studio-photo-window">
+            <div data-studio-track className="studio-photo-track">
+              <div className="studio-photo-slide">
+                <Photo
+                  src="/images/studio-drafting-desk.png"
+                  alt="Tavolo di lavoro dello studio con disegni e campioni materici"
+                  className="h-full w-full"
+                  sizes="(max-width: 1023px) 90vw, 50vw"
+                />
+              </div>
+              <div className="studio-photo-slide">
+                <Photo
+                  src="/images/moodboard-natural-materials.png"
+                  alt="Disegni tecnici e campioni di materiali naturali"
+                  className="h-full w-full"
+                  sizes="(max-width: 1023px) 90vw, 50vw"
+                />
+              </div>
             </div>
           </div>
         </div>
