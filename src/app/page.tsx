@@ -3,42 +3,43 @@ import Link from "next/link";
 import { Button } from "@/components/Button";
 import { Hero } from "@/components/Hero";
 import { Photo } from "@/components/Photo";
-import { ProjectCard } from "@/components/ProjectCard";
 import { ReviewCarousel } from "@/components/ReviewCarousel";
-import { ServiceCard } from "@/components/ServiceCard";
+import { FeaturedProjects } from "@/components/FeaturedProjects";
+import { HomeScrollEffects } from "@/components/HomeScrollEffects";
+import { ServicesExperience } from "@/components/ServicesExperience";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
 export default function HomePage() {
   return (
-    <>
+    <HomeScrollEffects>
       <Hero
         eyebrow="Studio Forma"
         title={
           <>
-            <span className="block">Progettiamo</span>
-            <span className="block">spazi che parlano</span>
-            <span className="block">di te.</span>
+            <span className="block overflow-hidden"><span data-hero-line className="block">Progettiamo</span></span>
+            <span className="block overflow-hidden"><span data-hero-line className="block">spazi che parlano</span></span>
+            <span className="block overflow-hidden"><span data-hero-line className="block">di te.</span></span>
           </>
         }
         text="Architettura contemporanea, funzionale e senza tempo. Dall'idea alla realizzazione, con cura e visione."
       />
 
-      <section className="section-space">
+      <section data-studio-section className="section-space">
         <div className="container-site grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
           <div className="max-w-md">
             <p className="eyebrow mb-6 flex items-center gap-3 after:h-px after:w-10 after:bg-[#b89a87]">
               Lo studio
             </p>
-            <h2 className="font-display text-[2.15rem] leading-[1.12] sm:text-[2.45rem]">
-              Ascoltiamo. Progettiamo. Realizziamo.
+            <h2 className="studio-title font-display text-[2.15rem] leading-[1.12] sm:text-[2.45rem]">
+              <span data-studio-word className="inline-block">Ascoltiamo.</span>{" "}<span data-studio-word className="inline-block">Progettiamo.</span>{" "}<span data-studio-word className="inline-block">Realizziamo.</span>
             </h2>
-            <p className="mt-6 text-[15px] leading-7 text-[#696a65]">
+            <p data-studio-copy className="mt-6 text-[15px] leading-7 text-[#696a65]">
               Ogni progetto nasce dall&apos;ascolto delle esigenze del cliente e
               dalla lettura del contesto. Uniamo estetica, funzionalità e
               sostenibilità per creare spazi autentici e senza tempo.
             </p>
-            <Link
+            <Link data-studio-copy
               href="/studio"
               className="mt-8 inline-flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.13em]"
             >
@@ -50,68 +51,30 @@ export default function HomePage() {
               />
             </Link>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="studio-photo-composition grid gap-5 sm:grid-cols-2 lg:items-start">
+            <div data-studio-photo="0" className="studio-photo-frame">
             <Photo
               src="/images/studio-drafting-desk.png"
               alt="Tavolo di lavoro dello studio con disegni e campioni materici"
-              className="aspect-[5/4]"
+              className="aspect-[5/4] lg:aspect-[4/3]"
             />
+            </div>
+            <div data-studio-photo="1" className="studio-photo-frame sm:mt-12">
             <Photo
               src="/images/moodboard-natural-materials.png"
               alt="Disegni tecnici e campioni di materiali naturali"
-              className="aspect-[5/4]"
+              className="aspect-[5/4] lg:aspect-square"
             />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-[#dedbd4] bg-[#f5f3ee] section-space">
-        <div className="container-site">
-          <p className="eyebrow mb-8 flex items-center gap-3 after:h-px after:w-10 after:bg-[#b89a87]">
-            I nostri servizi
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesExperience services={services} />
 
-      <section className="section-space">
-        <div className="container-site">
-          <div className="flex items-end justify-between gap-6">
-            <p className="eyebrow flex items-center gap-3 after:h-px after:w-10 after:bg-[#b89a87]">
-              Progetti in evidenza
-            </p>
-            <Link
-              href="/progetti"
-              className="hidden items-center gap-2 text-[12px] font-bold uppercase tracking-[0.13em] sm:inline-flex"
-            >
-              Vedi tutti i progetti
-              <Icon
-                icon="tabler:arrow-right"
-                className="h-4 w-4"
-                aria-hidden="true"
-              />
-            </Link>
-          </div>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {projects.slice(0, 5).map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-          <Button
-            href="/progetti"
-            variant="secondary"
-            className="mt-8 sm:hidden"
-          >
-            Tutti i progetti
-          </Button>
-        </div>
-      </section>
+      <FeaturedProjects projects={projects.slice(0, 5)} />
 
-      <section className="border-t border-[#dedbd4] bg-[#f5f3ee]">
+      <section data-testimonials-section className="border-t border-[#dedbd4] bg-[#f5f3ee]">
         <div className="container-site py-16 sm:py-20">
           <div className="mx-auto ">
             <ReviewCarousel />
@@ -119,33 +82,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#f5f3ee] ">
+      <section data-cta-section className="bg-[#f5f3ee]">
         <div
-          className="relative min-h-80 overflow-hidden px-8 flex items-center w-full text-white sm:px-12 lg:px-16"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, rgba(31,32,29,0.9), rgba(31,32,29,0.62)), url('/images/detail-olive-bench.png')",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
+          className="relative flex min-h-80 w-full items-center overflow-hidden px-8 text-white sm:px-12 lg:px-16"
         >
-          <div className="absolute inset-0 bg-[#2a2b28]/10" />
-          <div className="relative z-10 w-full  flex flex-wrap justify-between items-center h-full">
+          <div data-cta-photo aria-hidden="true" className="cta-photo absolute inset-[-5%]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1f201d]/90 via-[#1f201d]/60 to-[#1f201d]/25" />
+          <div className="relative z-10 flex h-full w-full flex-wrap items-center justify-between gap-5">
             <div>
-              <p className="font-display text-[2.1rem] leading-tight sm:text-[2.6rem]">
-                Hai un progetto da realizzare?
+              <p className="overflow-hidden font-display text-[2.1rem] leading-tight sm:text-[2.6rem]">
+                <span data-cta-title className="block">Hai un progetto da realizzare?</span>
               </p>
-              <p className="mt-5 text-[14px] leading-6 text-white/70">
+              <p data-cta-copy className="mt-5 text-[14px] leading-6 text-white/70">
                 Parliamone insieme. Siamo pronti ad ascoltare le tue idee.
               </p>
             </div>
 
-            <Button href="/contatti" variant="light" className="mt-8">
+            <div data-cta-button><Button href="/contatti" variant="light" className="mt-8">
               Contattaci
-            </Button>
+            </Button></div>
           </div>
         </div>
       </section>
-    </>
+    </HomeScrollEffects>
   );
 }

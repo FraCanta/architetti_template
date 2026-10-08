@@ -102,6 +102,193 @@ h3 {
   transform-origin: left;
 }
 
+.studio-title [data-studio-word] {
+  color: #20211f;
+}
+
+.hero-image {
+  transition: none !important;
+}
+
+.studio-photo-frame {
+  overflow: hidden;
+}
+
+.featured-gallery-viewport {
+  background: var(--paper);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .featured-gallery {
+    padding-top: max(6rem, 4.7vw);
+  }
+}
+
+.featured-gallery-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.featured-gallery-track {
+  align-items: flex-start;
+  display: flex;
+  gap: clamp(1rem, 2.2vw, 2rem);
+  padding-inline: 5vw;
+  width: max-content;
+}
+
+.featured-project-card {
+  flex: 0 0 clamp(20rem, 42vw, 46rem);
+  transition: color 350ms ease;
+}
+
+.featured-project-card[data-project-layout="wide"] {
+  flex-basis: clamp(20rem, 52vw, 56rem);
+}
+
+.featured-project-card[data-project-layout="portrait"] {
+  flex-basis: clamp(20rem, 32vw, 34rem);
+}
+
+.featured-project-photo {
+  background: #e9e5dc;
+  max-height: min(78vh, 48rem);
+}
+
+.featured-project-image {
+  transition: none !important;
+}
+
+.featured-project-title {
+  color: #696a65;
+  transition: color 350ms ease;
+}
+
+.featured-project-card:hover .featured-project-title,
+.featured-project-card.is-focused .featured-project-title,
+.featured-project-card:focus-within .featured-project-title {
+  color: #20211f;
+}
+
+.featured-project-indicator {
+  color: #9a725d;
+  opacity: 0.45;
+  transition: opacity 350ms ease;
+}
+
+.featured-project-card.is-focused .featured-project-indicator,
+.featured-project-card:focus-within .featured-project-indicator {
+  opacity: 1;
+}
+
+.cta-photo {
+  background-image: url('/images/detail-olive-bench.png');
+  background-position: center;
+  background-size: cover;
+}
+
+.service-list-link {
+  color: #20211f;
+  transition: color 250ms ease;
+}
+
+.service-list-title {
+  transition: color 250ms ease, transform 250ms ease;
+}
+
+.service-list-link.is-active .service-list-title,
+.service-list-link:hover .service-list-title,
+.service-list-link:focus-visible .service-list-title {
+  color: #765341;
+  transform: translateX(0.25rem);
+}
+
+.service-list-arrow {
+  color: #9a725d;
+  opacity: 0.35;
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.service-list-link.is-active .service-list-arrow,
+.service-list-link:hover .service-list-arrow,
+.service-list-link:focus-visible .service-list-arrow {
+  opacity: 1;
+  transform: translateX(0.2rem);
+}
+
+.featured-gallery-viewport.has-context-cursor,
+.featured-gallery-viewport.has-context-cursor a {
+  cursor: none;
+}
+
+.featured-gallery-cursor {
+  align-items: center;
+  background: #20211f;
+  border-radius: 9999px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.58rem;
+  font-weight: 700;
+  gap: 0.3rem;
+  height: 6.5rem;
+  justify-content: center;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  pointer-events: none;
+  position: fixed;
+  text-align: center;
+  text-transform: uppercase;
+  width: 6.5rem;
+  z-index: 90;
+}
+
+@media (max-width: 1023px) {
+  .featured-gallery-viewport {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .featured-gallery-track {
+    padding-inline: 5vw;
+  }
+
+  .featured-project-card {
+    flex-basis: min(84vw, 42rem);
+    scroll-snap-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-gallery-viewport {
+    overflow: visible;
+  }
+
+  .featured-gallery-track {
+    flex-wrap: wrap;
+    padding-inline: 5vw;
+    width: auto;
+  }
+
+  .featured-project-card,
+  .featured-project-card[data-project-layout="wide"],
+  .featured-project-card[data-project-layout="portrait"] {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .featured-project-card,
+  .featured-project-card[data-project-layout="wide"],
+  .featured-project-card[data-project-layout="portrait"] {
+    flex-basis: 100%;
+  }
+}
+
 .reveal {
   animation: reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }

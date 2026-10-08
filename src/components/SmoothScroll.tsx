@@ -1,8 +1,12 @@
 "use client";
 
 import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function SmoothScroll() {
   const pathname = usePathname();
@@ -13,22 +17,35 @@ export function SmoothScroll() {
       "(prefers-reduced-motion: reduce)",
     );
     let lenis: Lenis | undefined;
+    let removeScrollListener: (() => void) | undefined;
+    let tickLenis: ((time: number) => void) | undefined;
 
-    function updateScrollBehavior() {
+    function destroyLenis() {
+      if (tickLenis) gsap.ticker.remove(tickLenis);
+      tickLenis = undefined;
+      removeScrollListener?.();
+      removeScrollListener = undefined;
       lenis?.destroy();
       lenis = undefined;
       lenisRef.current = null;
+    }
+
+    function updateScrollBehavior() {
+      destroyLenis();
 
       if (reducedMotion.matches) return;
 
       lenis = new Lenis({
-        autoRaf: true,
+        autoRaf: false,
         smoothWheel: true,
         lerp: 0.085,
         anchors: true,
         stopInertiaOnNavigate: true,
       });
       lenisRef.current = lenis;
+      removeScrollListener = lenis.on("scroll", ScrollTrigger.update);
+      tickLenis = (time) => lenis?.raf(time * 1000);
+      gsap.ticker.add(tickLenis);
     }
 
     updateScrollBehavior();
@@ -36,8 +53,7 @@ export function SmoothScroll() {
 
     return () => {
       reducedMotion.removeEventListener("change", updateScrollBehavior);
-      lenis?.destroy();
-      lenisRef.current = null;
+      destroyLenis();
     };
   }, []);
 

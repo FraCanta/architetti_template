@@ -15,7 +15,7 @@ function ServiceIcon({ index }: { index: string }) {
   return (
     <Icon
       icon={icons[index] ?? icons["01"]}
-      className="h-8 w-8 text-[#20211f]"
+      className="h-8 w-8 text-[#20211f] transition-transform duration-300 group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5"
       aria-hidden="true"
     />
   );
@@ -30,7 +30,7 @@ export function ServiceCard({ service }: { service: Service }) {
       >
         <ServiceIcon index={service.number} />
         <div className="mt-auto pt-8">
-          <h3 className="text-[17px] font-bold leading-6">{service.title}</h3>
+          <h3 className="text-[17px] font-bold leading-6 transition-colors duration-300 group-hover:text-[#765341] group-focus-visible:text-[#765341]">{service.title}</h3>
           <p className="mt-4 text-[13px] leading-[1.55] text-[#696a65]">
             {service.shortDescription}
           </p>
